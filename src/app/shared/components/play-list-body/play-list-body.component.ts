@@ -10,6 +10,7 @@ import * as dataRaw from '../../../data/tracks.json';
 export class PlayListBodyComponent implements OnInit {
   
   tracks: TracksModel[] = [];
+  optionSort:{ property: string | null, order: string } = { property:null, order:'asc'}
 
   constructor() { }
 
@@ -18,4 +19,11 @@ export class PlayListBodyComponent implements OnInit {
     this.tracks = data;
   }
 
+  changeSort(property: string): void{
+    const { order } = this.optionSort;
+    this.optionSort = {
+      property,
+      order: order === 'asc' ? 'desc' : 'asc'
+    }
+  }
 }
