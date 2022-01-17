@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { MadiaPlayerComponent } from './components/madia-player/madia-player.component';
 import { HeaderUserComponent } from './components/header-user/header-user.component';
 import { SideBarComponent } from './components/side-bar/side-bar.component';
+import { CardPlayerComponent } from './components/card-player/card-player.component';
+import { SectionGenericComponent } from './components/section-generic/section-generic.component';
 
 
 
@@ -10,7 +12,9 @@ import { SideBarComponent } from './components/side-bar/side-bar.component';
   declarations: [
     SideBarComponent,
     MadiaPlayerComponent,
-    HeaderUserComponent
+    HeaderUserComponent,
+    CardPlayerComponent,
+    SectionGenericComponent
   ],
   imports: [
     CommonModule,
@@ -18,7 +22,9 @@ import { SideBarComponent } from './components/side-bar/side-bar.component';
   exports:[
     SideBarComponent,
     MadiaPlayerComponent,
-    HeaderUserComponent
+    HeaderUserComponent,
+    CardPlayerComponent,
+    SectionGenericComponent
   ]
 })
 export class SharedModule { }
