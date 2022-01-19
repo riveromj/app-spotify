@@ -25,8 +25,11 @@ export class AuthPageComponent implements OnInit {
     console.log(body);
     const { email, password }= body;
     this.authService.sendCredentiasl(email, password)
-    .subscribe( responseOK =>{
+    .subscribe( responseOk =>{
       console.log('Session exitosa');
+      const { tokenSession, data } = responseOk
+        localStorage.setItem('token', tokenSession);
+        //this.cookie.set('token', tokenSession, 4, '/') //TODO:📌📌📌📌
       
     }, err =>{
       this.errorSession= true;
