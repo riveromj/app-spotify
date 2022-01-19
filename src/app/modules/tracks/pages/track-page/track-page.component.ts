@@ -11,28 +11,39 @@ import { TracksModel } from '../../../../core/models/tracks.model';
 })
 export class TrackPageComponent implements OnInit, OnDestroy {
 
-  mockList: Array<TracksModel>=[];
-
   tracksTrending: Array<TracksModel>=[];
   tracksRandom: Array<TracksModel>=[];
-
-  listObservables$ : Array<Subscription> = [];
 
     constructor( private trackService: TrackService) { }
 
   ngOnInit(): void {
-    
-    const observer1$ = this.trackService.dataTracksTrading$
-      .subscribe( response => {
-        this.tracksTrending = response
-      })
-
-      this.listObservables$ = [observer1$];
+    this.loadDataAll();
+    this.loadDataRandom();
+    //this.loadDataTrainig();
   }
 
-  ngOnDestroy(): void {
-    this.listObservables$.forEach( u => u.unsubscribe());
+  loadDataTrainig(): void{ //manejando el observable como promesa
+    this.trackService.getAllTracks$().toPromise()
+      .then( res =>{ this.tracksTrending = res})
+      .catch (err => {
+        console.log(err);
+      });
+  };
+  async loadDataAll(): Promise<any>{ //manejando el observable como promesa
+    this.tracksTrending = await this.trackService.getAllTracks$().toPromise();
+  };
 
+  loadDataRandom():void{ //manejando el observable como observable
+    this.trackService.getAllTracksRandom$()
+    .subscribe( response =>{
+      console.log(response);
+      this.tracksRandom = response;
+    }, err => { console.log(err);
+    });
+  };
+
+  ngOnDestroy(): void {
+   
   }
 
 }
