@@ -10,21 +10,30 @@ import { AuthService } from '@modules/auth/services/auth.service';
 export class AuthPageComponent implements OnInit {
 
   formLogin: FormGroup = new FormGroup({});
-  errorSession: string ='';
+  errorSession: boolean = false;
 
   constructor( private authService: AuthService) { }
 
   ngOnInit(): void {
     this.formLogin = new FormGroup({
       email: new FormControl('',[ Validators.required, Validators.email]),
-      password: new FormControl('', [Validators.required, Validators.minLength(6), Validators.minLength(12)])
+      password: new FormControl('', [Validators.required, Validators.minLength(6), Validators.minLength(8)])
     })
   }
   sendLogin(){
     const body = this.formLogin.value;
     console.log(body);
     const { email, password }= body;
-    this.authService.sendCredentiasl(email, password);
+    this.authService.sendCredentiasl(email, password)
+    .subscribe( responseOK =>{
+      console.log('Session exitosa');
+      
+    }, err =>{
+      this.errorSession= true;
+      console.log('error de autentificacion', err);
+      
+    })
+     
   }
 
 }
