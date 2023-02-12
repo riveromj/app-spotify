@@ -4,17 +4,17 @@ import { AuthPageComponent } from './pages/auth-page/auth-page.component';
 
 const routes: Routes = [
   {
-    path:'login', //TODO: http://localhost:4200/auth/login
-    component: AuthPageComponent
+    path: 'login', //TODO: http://localhost:4200/auth/login
+    component: AuthPageComponent,
   },
   {
-    path:'**',
-    redirectTo: '/auth/login'
-  }
+    path: '**',
+    redirectTo: '/auth/login',
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AuthRoutingModule { }
+export class AuthRoutingModule {}
